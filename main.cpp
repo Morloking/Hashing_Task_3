@@ -19,19 +19,21 @@ int findSubstringLightRabinKarp(std::string str, std::string substr) {
 		currentHash += static_cast<unsigned char>(symbol);
 	}
 	
-	bool firstWindowIsSucced = true;
+	
 	if (allHash == currentHash) {
+		bool firstWindowIsSucced = true;
 		for (int i = 0; i < substr.length(); ++i) {
 			if (str[i] != substr[i]) {
 				firstWindowIsSucced = false;
 				break;
 			}
 		}
+		if (firstWindowIsSucced) {
+			return 0;
+		}
 	}
 
-	if (firstWindowIsSucced) {
-		return 0;
-	}
+	
 
 	//цикл сдвига
 	
