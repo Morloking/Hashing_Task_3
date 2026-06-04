@@ -8,12 +8,12 @@ int findSubstringLightRabinKarp(std::string str, std::string substr) {
 	if (substr.length() > str.length()) {
 		return -1;
 	}
-	int allHash{}; //хэш подсроки
+	int allHash{}; //С…СЌС€ РїРѕРґСЃСЂРѕРєРё
 	for (char symbol : substr) {
 		allHash += static_cast<unsigned char>(symbol);
 	}
 
-	int currentHash{}; //подсчет хэша первого окна
+	int currentHash{}; //РїРѕРґСЃС‡РµС‚ С…СЌС€Р° РїРµСЂРІРѕРіРѕ РѕРєРЅР°
 	for (int i = 0; i < substr.length(); ++i) {
 		char symbol = str[i];
 		currentHash += static_cast<unsigned char>(symbol);
@@ -33,19 +33,19 @@ int findSubstringLightRabinKarp(std::string str, std::string substr) {
 		return 0;
 	}
 
-	//цикл сдвига
+	//С†РёРєР» СЃРґРІРёРіР°
 	
 	for (int i = 1; i <= (str.length() - substr.length()); ++i) {
-		//перемещение окна
-		currentHash -= static_cast<unsigned char> (str[i-1]); //убираем лишний символ
-		currentHash += static_cast<unsigned char>(str[i + substr.length() - 1]); //добавляем новый, который справа
+		//РїРµСЂРµРјРµС‰РµРЅРёРµ РѕРєРЅР°
+		currentHash -= static_cast<unsigned char> (str[i-1]); //СѓР±РёСЂР°РµРј Р»РёС€РЅРёР№ СЃРёРјРІРѕР»
+		currentHash += static_cast<unsigned char>(str[i + substr.length() - 1]); //РґРѕР±Р°РІР»СЏРµРј РЅРѕРІС‹Р№, РєРѕС‚РѕСЂС‹Р№ СЃРїСЂР°РІР°
 
 		if (allHash == currentHash) {
-			//более точная проверка уже по символам, когда есть совпадение по хэшу
+			//Р±РѕР»РµРµ С‚РѕС‡РЅР°СЏ РїСЂРѕРІРµСЂРєР° СѓР¶Рµ РїРѕ СЃРёРјРІРѕР»Р°Рј, РєРѕРіРґР° РµСЃС‚СЊ СЃРѕРІРїР°РґРµРЅРёРµ РїРѕ С…СЌС€Сѓ
 
 			bool otherWindowIsSucces = true;
 			for (int j = 0; j < substr.length(); ++j) {
-				if (str[i+j] != substr[j]) { //сравнение символа из окна и соответствующего символа подсроки
+				if (str[i+j] != substr[j]) { //СЃСЂР°РІРЅРµРЅРёРµ СЃРёРјРІРѕР»Р° РёР· РѕРєРЅР° Рё СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРіРѕ СЃРёРјРІРѕР»Р° РїРѕРґСЃСЂРѕРєРё
 					otherWindowIsSucces = false;
 					break;
 				}
@@ -65,17 +65,17 @@ int main() {
 	std::string str{}, substr{};
 	int index{};
 
-	std::cout << "Введите строку, в которой будет осуществляться поиск: ";
+	std::cout << "Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ, РІ РєРѕС‚РѕСЂРѕР№ Р±СѓРґРµС‚ РѕСЃСѓС‰РµСЃС‚РІР»СЏС‚СЊСЃСЏ РїРѕРёСЃРє: ";
 	std::cin >> str;
 	do {
-		std::cout << "Введите подстроку, которую нужно найти: ";
+		std::cout << "Р’РІРµРґРёС‚Рµ РїРѕРґСЃС‚СЂРѕРєСѓ, РєРѕС‚РѕСЂСѓСЋ РЅСѓР¶РЅРѕ РЅР°Р№С‚Рё: ";
 		std::cin >> substr;
 		index = findSubstringLightRabinKarp(str, substr);
 		if (index == -1) {
-			std::cout << "Подстрока " << substr << " не найдена\n";
+			std::cout << "РџРѕРґСЃС‚СЂРѕРєР° " << substr << " РЅРµ РЅР°Р№РґРµРЅР°\n";
 		}
 		else {
-			std::cout << "Подстрока " << substr << " найдена по индексу " << index << "\n";
+			std::cout << "РџРѕРґСЃС‚СЂРѕРєР° " << substr << " РЅР°Р№РґРµРЅР° РїРѕ РёРЅРґРµРєСЃСѓ " << index << "\n";
 		}
 	} while (substr != "exit");
 
