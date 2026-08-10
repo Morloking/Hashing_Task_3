@@ -64,7 +64,7 @@ int findSubstringLightRabinKarp(std::string str, std::string substr) {
 
 int main() {
 	SetConsoleOutputCP(1251);
-	std::getline str{}, substr{};
+	std::string str{}, substr{};
 	int index{};
 
 	std::cout << "Введите строку, в которой будет осуществляться поиск: ";
